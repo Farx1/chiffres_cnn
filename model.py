@@ -64,28 +64,30 @@ def preprocess_data():
     
     return (x_train, y_train), (x_test, y_test)
 
-def train_model():
+def train_model(force_retrain=False):
     # Vérifier si le modèle et l'historique existent déjà
-    if os.path.exists(MODEL_PATH) and os.path.exists(HISTORY_PATH):
+    if not force_retrain and os.path.exists(MODEL_PATH) and os.path.exists(HISTORY_PATH):
         try:
             # Charger le modèle existant
             model = tf.keras.models.load_model(MODEL_PATH)
             # Charger l'historique
             with open(HISTORY_PATH, 'rb') as f:
                 history = pickle.load(f)
-            print("Modèle chargé depuis le fichier sauvegardé")
+            print("✅ Modèle chargé depuis le fichier sauvegardé")
             return model, history
         except Exception as e:
-            print(f"Erreur lors du chargement du modèle : {e}")
-            print("Entraînement d'un nouveau modèle...")
+            print(f"⚠️ Erreur lors du chargement du modèle : {e}")
+            print("🔄 Entraînement d'un nouveau modèle...")
 
     # Si le modèle n'existe pas ou n'a pas pu être chargé, l'entraîner
-    print("Entraînement d'un nouveau modèle...")
+    print("🚀 Démarrage de l'entraînement d'un nouveau modèle...")
     
     # Charger et prétraiter les données
+    print("📦 Chargement des données MNIST...")
     (x_train, y_train), (x_test, y_test) = preprocess_data()
     
     # Créer et compiler le modèle
+    print("🔧 Configuration du modèle...")
     model = create_model()
     model.compile(
         optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
@@ -109,6 +111,7 @@ def train_model():
     ]
     
     # Entraînement
+    print("⏳ Entraînement en cours...")
     history = model.fit(
         x_train, y_train,
         epochs=20,
@@ -119,25 +122,39 @@ def train_model():
     )
     
     # Évaluation
+    print("📊 Évaluation du modèle...")
     test_loss, test_acc = model.evaluate(x_test, y_test, verbose=0)
-    print(f'\nPrécision sur le jeu de test : {test_acc:.4f}')
+    print(f'✨ Précision sur le jeu de test : {test_acc:.4f}')
     
     # Créer le dossier model s'il n'existe pas
     os.makedirs('model', exist_ok=True)
     
     try:
         # Sauvegarder le modèle
+        print("💾 Sauvegarde du modèle...")
         model.save(MODEL_PATH)
         
         # Sauvegarder l'historique
         with open(HISTORY_PATH, 'wb') as f:
             pickle.dump(history.history, f)
         
-        print("Modèle et historique sauvegardés")
+        print("✅ Modèle et historique sauvegardés avec succès")
     except Exception as e:
-        print(f"Erreur lors de la sauvegarde : {e}")
+        print(f"❌ Erreur lors de la sauvegarde : {e}")
     
     return model, history
 
+def get_or_train_model():
+    """
+    Charge le modèle s'il existe, sinon l'entraîne.
+    Retourne le modèle et son historique d'entraînement.
+    """
+    try:
+        model, history = train_model(force_retrain=False)
+        return model, history
+    except Exception as e:
+        print(f"❌ Erreur lors du chargement/entraînement du modèle : {e}")
+        raise
+
 if __name__ == '__main__':
-    model, history = train_model()
+    model, history = get_or_train_model()

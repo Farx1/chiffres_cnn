@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# Model files (will be generated on first run)
+model/*.keras
+model/*.pkl
+
+# Temp files
+temp/
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# System
+.DS_Store
+Thumbs.db 

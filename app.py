@@ -1,6 +1,6 @@
 import streamlit as st
 import numpy as np
-from model import create_model, train_model
+from model import get_or_train_model
 from utils import preprocess_image, convert_streamlit_sketch_to_image, get_prediction_confidence
 from visualize import plot_activation_maps, plot_prediction_confidence, plot_training_history
 import tensorflow as tf
@@ -18,8 +18,8 @@ st.set_page_config(
 # Fonction pour charger le modèle (avec mise en cache)
 @st.cache_resource
 def load_model():
-    with st.spinner('🔄 Chargement du modèle...'):
-        model, history = train_model()
+    with st.spinner('🔄 Chargement ou entraînement du modèle...'):
+        model, history = get_or_train_model()
     return model, history
 
 # Chargement du modèle
