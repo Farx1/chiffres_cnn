@@ -6,7 +6,8 @@
             "use": "@vercel/python",
             "config": {
                 "maxLambdaSize": "15mb",
-                "runtime": "python3.12"
+                "runtime": "python3.12",
+                "buildCommand": "chmod +x build.sh && ./build.sh"
             }
         }
     ],
@@ -19,6 +20,7 @@
     "env": {
         "PYTHONUNBUFFERED": "1",
         "STREAMLIT_SERVER_PORT": "8080",
-        "STREAMLIT_SERVER_ADDRESS": "0.0.0.0"
+        "STREAMLIT_SERVER_ADDRESS": "0.0.0.0",
+        "PYTHONPATH": "/vercel/path0"
     }
 } 
