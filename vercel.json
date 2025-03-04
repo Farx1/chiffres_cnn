@@ -7,7 +7,7 @@
             "config": {
                 "maxLambdaSize": "15mb",
                 "runtime": "python3.12",
-                "buildCommand": "pip install --upgrade pip setuptools wheel && pip install -e ."
+                "buildCommand": "python -m pip install --upgrade pip && pip install -r vercel-requirements.txt"
             }
         }
     ],
