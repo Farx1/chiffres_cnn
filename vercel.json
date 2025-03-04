@@ -7,7 +7,7 @@
             "config": {
                 "maxLambdaSize": "15mb",
                 "runtime": "python3.11",
-                "buildCommand": "pip install -r vercel-requirements.txt"
+                "buildCommand": "pip install -r vercel-requirements.txt && chmod +x vercel.sh"
             }
         }
     ],
