@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Afficher la version de Python
+python --version
+
+# Mettre à jour pip
+python -m pip install --upgrade pip
+
 # Installer les dépendances avec pip en mode minimal
 pip install --no-cache-dir -r requirements.txt
 
@@ -12,4 +18,10 @@ find . -type d -name "docs" -exec rm -r {} +
 find . -type d -name "examples" -exec rm -r {} +
 
 # Créer le dossier model s'il n'existe pas
-mkdir -p model 
+mkdir -p model
+
+# Vérifier l'espace disque disponible
+df -h
+
+# Lister les paquets installés
+pip list 
