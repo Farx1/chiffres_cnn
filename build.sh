@@ -6,7 +6,10 @@ python --version
 # Mettre à jour pip
 python -m pip install --upgrade pip
 
-# Installer les dépendances avec pip en mode minimal
+# Installer d'abord les dépendances de build
+pip install --no-cache-dir -r requirements-build.txt
+
+# Installer les dépendances principales
 pip install --no-cache-dir -r requirements.txt
 
 # Nettoyer les fichiers inutiles
