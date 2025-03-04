@@ -2,11 +2,15 @@
 
 Application web interactive de classification de chiffres manuscrits utilisant un réseau de neurones convolutif (CNN).
 
-## 🚀 Installation
+## 🌟 Démo en ligne
+
+Vous pouvez tester l'application en direct sur Railway : [Lien à venir]
+
+## 🚀 Installation locale
 
 1. **Cloner le repository**
 ```bash
-git clone https://github.com/votre-username/chiffres_cnn.git
+git clone https://github.com/Farx1/chiffres_cnn.git
 cd chiffres_cnn
 ```
 
@@ -23,14 +27,39 @@ venv\Scripts\activate  # Windows
 pip install -r requirements.txt
 ```
 
-## 🎯 Utilisation
+4. **Configurer les variables d'environnement**
+```bash
+cp .env.example .env
+# Modifier les valeurs dans .env selon vos besoins
+```
 
-1. **Lancer l'application**
+5. **Lancer l'application**
 ```bash
 streamlit run app.py
 ```
 
-2. **Premier lancement**
-- Lors du premier lancement, le modèle sera automatiquement entraîné
-- Cette étape peut prendre quelques minutes
-- Le modèle sera ensuite sauvegardé pour les utilisations futures
+## 🚂 Déploiement sur Railway
+
+1. Créez un compte sur [Railway.app](https://railway.app/)
+2. Connectez votre compte GitHub
+3. Créez un nouveau projet depuis le dépôt GitHub
+4. Railway détectera automatiquement la configuration et déploiera l'application
+
+## 🛠️ Technologies utilisées
+
+- Python 3.11
+- TensorFlow 2.15
+- Streamlit 1.22
+- scikit-learn 1.3.0
+- OpenCV
+
+## 📊 Fonctionnalités
+
+- ✏️ Interface de dessin interactive
+- 🧠 Classification en temps réel
+- 📈 Visualisation des activations du réseau
+- 📊 Analyse des probabilités de prédiction
+
+## 📝 License
+
+MIT License
